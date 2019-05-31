@@ -2,7 +2,7 @@
 FROM centos:6.9
 
 ## INSTALL JDK 8
-RUN yum update -y \
+RUN yum update -y && \
     yum install -y  java-1.8.0-openjdk*
 
 ## MISCELANEOUS PACKAGES.

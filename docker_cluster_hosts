@@ -1,0 +1,4 @@
+192.168.123.2 salve1.cluster
+192.168.123.3 slave2.cluster
+192.168.123.4 master1.cluster
+

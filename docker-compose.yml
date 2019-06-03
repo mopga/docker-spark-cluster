@@ -6,50 +6,31 @@ services:
        context: ./Slaves
        dockerfile: Dockerfile
      image: hdp_slave
-     ports:
-      - 8081:8081
+     environment:
+       - SPARK_WORKER_WEBUI_PORT=8082
+       - SPARK_WORKER_LOG=/spark/logs
+       - SPARK_MASTER=127.0.0.1:7077
+     network_mode: host
      container_name: hdp_slave1
-     hostname: salve1.cluster
-     networks:
-       dev_cluster:
-         ipv4_address: 192.168.123.2
-     volumes:
-       - /etc/hosts:/etc/hosts
    salve2:
      build:
        context: ./Slaves
        dockerfile: Dockerfile
      image: hdp_slave
-     ports:
-      - 8082:8081
+     environment:
+       - SPARK_WORKER_WEBUI_PORT=8083
+       - SPARK_WORKER_LOG=/spark/logs
+       - SPARK_MASTER=127.0.0.1:7077
+     network_mode: host
      container_name: hdp_slave2
-     hostname: slave2.cluster
-     networks:
-       dev_cluster:
-         ipv4_address: 192.168.123.3
-     volumes:
-       - /etc/hosts:/etc/hosts
    master1:
      build:
        context: ./Masters
        dockerfile: Dockerfile
      image: hdp_master
-     ports:
-       - 8080:8080
-       - 7077:7077
+     environment:
+       - SPARK_MASTER_PORT=7077
+       - SPARK_MASTER_LOG=/spark/logs
+       - SPARK_MASTER_WEBUI_PORT=8080
+     network_mode: host
      container_name: hdp_master1
-     hostname: master1.cluster
-     networks:
-       dev_cluster:
-         ipv4_address: 192.168.123.4
-     volumes:
-       - /etc/hosts:/etc/hosts
-
-networks:
-  dev_cluster:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.123.0/24
-
-

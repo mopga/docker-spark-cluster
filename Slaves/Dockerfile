@@ -7,7 +7,7 @@ RUN yum update -y && \
 
 ## MISCELANEOUS PACKAGES.
 RUN yum update -y && \
-    yum install  -y sudo wget tar curl python3 py-pip
+    yum install  -y wget tar curl
 RUN yum clean all
 
 ## DOWNLOAD AND INSTALL SCALA
@@ -28,11 +28,5 @@ RUN cd / && \
     rm -f spark-2.3.1-bin-hadoop2.7.tgz
 
 COPY worker.sh /
-
-ENV SPARK_WORKER_WEBUI_PORT 8081
-ENV SPARK_WORKER_LOG /spark/logs
-ENV SPARK_MASTER "spark://master1.cluster:7077"
-
-#EXPOSE 8081
 
 CMD ["/bin/bash", "/worker.sh"]

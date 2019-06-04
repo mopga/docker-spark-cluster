@@ -12,6 +12,8 @@ services:
        - SPARK_MASTER=127.0.0.1:7077
      network_mode: host
      container_name: hdp_slave1
+     volumes:
+       - /etc/hosts:/etc/hosts
    salve2:
      build:
        context: ./Slaves
@@ -23,6 +25,8 @@ services:
        - SPARK_MASTER=127.0.0.1:7077
      network_mode: host
      container_name: hdp_slave2
+     volumes:
+       - /etc/hosts:/etc/hosts
    master1:
      build:
        context: ./Masters
@@ -33,4 +37,6 @@ services:
        - SPARK_MASTER_LOG=/spark/logs
        - SPARK_MASTER_WEBUI_PORT=8080
      network_mode: host
-     container_name: hdp_master1
+     container_name: hdp_master
+     volumes:
+       - /etc/hosts:/etc/hosts

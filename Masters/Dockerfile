@@ -18,14 +18,18 @@ RUN wget https://downloads.lightbend.com/scala/2.11.8/scala-2.11.8.tgz && \
     export PATH=$PATH:/usr/lib/scala/bin && \
     rm -f scala-2.11.8.tgz
 
-## DOWNLOAD AND INSTALL SPARK 2.3.0
+## DOWNLOAD AND INSTALL SPARK 2.4.3
 RUN cd / && \
-    wget https://archive.apache.org/dist/spark/spark-2.3.0/spark-2.3.0-bin-hadoop2.6.tgz && \
-    tar -xvzf spark-2.3.0-bin-hadoop2.6.tgz && \
+    wget https://archive.apache.org/dist/spark/spark-2.4.3/spark-2.4.3-bin-hadoop2.7.tgz && \
+    tar -xvzf spark-2.4.3-bin-hadoop2.7.tgz && \
     mkdir spark && \
-    mv spark-2.3.0-bin-hadoop2.6/* /spark && \
+    mv spark-2.4.3-bin-hadoop2.7/* /spark && \
     PATH=$PATH:$HOME/bin:/usr/local/spark/bin && \
-    rm -f spark-2.3.1-bin-hadoop2.7.tgz
+    rm -f spark-2.4.3-bin-hadoop2.7.tgz
+
+RUN cd / && \
+    wget http://central.maven.org/maven2/io/delta/delta-core_2.11/0.1.0/delta-core_2.11-0.1.0.jar && \
+    mv delta-core_2.11-0.1.0.jar /spark/jars/
 
 COPY master.sh /
 

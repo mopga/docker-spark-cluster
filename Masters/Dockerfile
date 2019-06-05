@@ -18,18 +18,20 @@ RUN wget https://downloads.lightbend.com/scala/2.11.8/scala-2.11.8.tgz && \
     export PATH=$PATH:/usr/lib/scala/bin && \
     rm -f scala-2.11.8.tgz
 
-## DOWNLOAD AND INSTALL SPARK 2.4.3
-RUN cd / && \
-    wget https://archive.apache.org/dist/spark/spark-2.4.3/spark-2.4.3-bin-hadoop2.7.tgz && \
-    tar -xvzf spark-2.4.3-bin-hadoop2.7.tgz && \
-    mkdir spark && \
-    mv spark-2.4.3-bin-hadoop2.7/* /spark && \
-    PATH=$PATH:$HOME/bin:/usr/local/spark/bin && \
-    rm -f spark-2.4.3-bin-hadoop2.7.tgz
+ENV SPARK_VER=2.3.0
 
+## DOWNLOAD AND INSTALL SPARK
 RUN cd / && \
-    wget http://central.maven.org/maven2/io/delta/delta-core_2.11/0.1.0/delta-core_2.11-0.1.0.jar && \
-    mv delta-core_2.11-0.1.0.jar /spark/jars/
+    wget https://archive.apache.org/dist/spark/spark-$SPARK_VER/spark-$SPARK_VER-bin-hadoop2.7.tgz && \
+    tar -xvzf spark-$SPARK_VER-bin-hadoop2.7.tgz && \
+    mkdir spark && \
+    mv spark-$SPARK_VER-bin-hadoop2.7/* /spark && \
+    PATH=$PATH:$HOME/bin:/spark/bin && \
+    rm -rf spark-$SPARK_VER-bin-hadoop2.7*
+
+#RUN cd / && \
+#    wget https://dist.apache.org/repos/dist/release/carbondata/1.5.3/apache-carbondata-1.5.3-bin-spark2.3.2-hadoop2.7.2.jar && \
+#    mv apache-carbondata-1.5.3-bin-spark2.3.2-hadoop2.7.2.jar /spark/jars/
 
 COPY master.sh /
 

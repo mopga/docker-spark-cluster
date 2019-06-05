@@ -18,7 +18,7 @@ RUN wget https://downloads.lightbend.com/scala/2.11.8/scala-2.11.8.tgz && \
     export PATH=$PATH:/usr/lib/scala/bin && \
     rm -f scala-2.11.8.tgz
 
-NV SPARK_VER=2.3.0
+ENV SPARK_VER=2.3.0
 
 ## DOWNLOAD AND INSTALL SPARK
 RUN cd / && \
